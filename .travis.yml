@@ -1,0 +1,17 @@
+language: node_js
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker-compose build
+  - docker-compose up -d
+  - cd integration-test
+install:
+  - npm install  
+script:
+  - npm start
+after_success:
+  - docker-compose down -v
+after_failure:
+  - docker-compose down -v
